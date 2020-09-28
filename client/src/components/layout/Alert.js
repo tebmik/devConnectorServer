@@ -6,11 +6,7 @@ const Alert = ({ alerts }) =>
     alerts !== null &&
     alerts.length > 0 &&
     alerts.map(alert => (
-        <div
-            style={{ position: 'absolute', width: '100%' }}
-            key={alert.id}
-            className={`alert alert-${alert.alertType}`}
-        >
+        <div key={alert.id} className={`alert alert-${alert.alertType}`}>
             {alert.msg}
         </div>
     ));
