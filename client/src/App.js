@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
@@ -9,26 +9,45 @@ import Alert from './components/layout/Alert';
 // Redux
 import store from './store';
 import { Provider } from 'react-redux';
+import { loadUser } from './actions/auth';
+import setAuthToken from './utils/setAuthToken';
 
 import './App.css';
 
-const App = () => (
-    <>
-        <Provider store={store}>
-            <BrowserRouter>
-                <Navbar />
-                <Route exact path='/' component={Landing} />
+if (localStorage.token) {
+    setAuthToken(localStorage.token);
+}
 
-                <section className='container' style={{ position: 'relative' }}>
-                    <Alert />
-                    <Switch>
-                        <Route exact path='/login' component={Login} />
-                        <Route exact path='/register' component={Register} />
-                    </Switch>
-                </section>
-            </BrowserRouter>
-        </Provider>
-    </>
-);
+const App = () => {
+    useEffect(() => {
+        store.dispatch(loadUser());
+    }, []);
+
+    return (
+        <>
+            <Provider store={store}>
+                <BrowserRouter>
+                    <Navbar />
+                    <Route exact path='/' component={Landing} />
+
+                    <section
+                        className='container'
+                        style={{ position: 'relative' }}
+                    >
+                        <Alert />
+                        <Switch>
+                            <Route exact path='/login' component={Login} />
+                            <Route
+                                exact
+                                path='/register'
+                                component={Register}
+                            />
+                        </Switch>
+                    </section>
+                </BrowserRouter>
+            </Provider>
+        </>
+    );
+};
 
 export default App;
