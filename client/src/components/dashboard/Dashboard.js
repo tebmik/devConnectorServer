@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile';
+import { DashboardActions } from './DashboardActions';
 
 import Spinner from '../layout/Spinner';
 
@@ -39,7 +40,9 @@ const Dashboard = ({
                 <i className='fas fa-user'></i> Welcome {user && user.name}
             </p>
             {profile !== null ? (
-                <>Profile available</>
+                <>
+                    <DashboardActions />
+                </>
             ) : (
                 <>
                     <p>You have not set up a porfile, please add some info.</p>
