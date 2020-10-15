@@ -28,9 +28,7 @@ const Dashboard = ({
 }) => {
     useEffect(() => {
         getCurrentProfile();
-    }, []);
-
-    console.log(profile);
+    }, [getCurrentProfile]);
 
     return loading && profile === null ? (
         <StyledWrapper>
