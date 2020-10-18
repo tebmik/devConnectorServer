@@ -83,7 +83,7 @@ export const createProfile = (
 ) => async dispatch => {
     try {
         const config = {
-            header: {
+            headers: {
                 'Content-Type': 'application/json',
             },
         };
